@@ -77,4 +77,3 @@ Data is from FEMA dataset. Downloaded on May 11th 2018.
 Wow, found previous work
 https://github.com/jdungan/disasters
 
-Hello LinsiJie.
