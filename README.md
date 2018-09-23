@@ -9,7 +9,7 @@
 
 A web app for historical disaster analysis
 
-Contributor: Zeyu Chen(chenzy@gatech.edu), Xibei Zhang(xb_zhang@gatech.edu)
+Contributor: Zeyu Chen(chenzy@gatech.edu), Sijie Lin(linsijie17@163.com)
 
 ## Goal
 
