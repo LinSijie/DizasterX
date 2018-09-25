@@ -6,7 +6,7 @@ Front End of DizasterX
 React + Ant-design
 `WebApp` is the directory for local development and local test.
 
-### `WebApp` structure:
+### Structure:
 
 ```
 WebApp/
