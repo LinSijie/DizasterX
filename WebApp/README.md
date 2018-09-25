@@ -3,12 +3,13 @@
 Front End of DizasterX
 
 ## Front End Repo
+
 React + Ant-design
 `WebApp` is the directory for local development and local test.
 
-### Structure:
+### Structure
 
-```
+```bash
 WebApp/
 ├── public/
 │   ├── favicon.ico
@@ -18,9 +19,9 @@ WebApp/
 ├── src/
 │   ├── Components/
 |   |   ├── UrlConcat.js
-|   │   ├── WrappedForm.js   
-|   │   └── WrappedList.js        
-|   │                 
+|   │   ├── WrappedForm.js
+|   │   └── WrappedList.js
+|   │
 |   ├── index.js
 |   ├── index.css
 |   ├── logo.svg
@@ -30,6 +31,7 @@ WebApp/
 ├── package.json
 └── README.md
 ```
+
 ### Function Description
 
 `index.js` describes the layout of the website. The website is divided into 4 parts: Header, Sider, Content, and Footer. The search bars lays in the Sider part. Searching results are listed in the Content part.
@@ -41,5 +43,3 @@ WebApp/
 `DataExtract.js` is a component which extract key information from the data. To Do
 
 `WrappedList.js` is a component which display the searching result. It receive data from `DataExtract.js`. To Do
-
-
