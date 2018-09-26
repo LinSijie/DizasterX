@@ -80,7 +80,7 @@ class UrlConcat extends Component {
         // server
         // let url = "http://czy-kasakun.com:8080/DizasterX/webapi/data/";
         // local test
-        let url = "http://localhost:8080/DizasterX/webapi/data/";
+        let url = "http://localhost:8080/DizasterX/data/";
         let len = url.length;
         if (state !== '')
             url = url + 'state?value=' + state;
