@@ -19,7 +19,7 @@ Provide an efficient solution for history disaster study and research.
 
 ### Front End Repo
 
-Front: react+redux, ant-design,d3(it denpends on xibei)
+Front: react+redux, ant-design,d3
 
 ### Back End Repo
 
@@ -62,11 +62,12 @@ Currently, the query size cannot be too large due to the limited memory of the s
 | Goals                    | Description                              | Priority | Contributor |   Status  |
 | ------------------------ |:----------------------------------------:| --------:| -----------:|----------:|
 | ~~db build~~             | ~~mongodb setup~~                        | ~~High~~ | Zeyu Chen   |  Done     |
-| front end(react + redux) | design app structure                     | High     | Xibei Zhang |  To Do    |
-| data virtulization       | d3 or opengl for js is recommended       | Low      | Xibei Zhang |  To Do    |
+| front end(react + redux) | design app structure                     | High     | Sijie Lin   |  Progress |
+| data virtulization       | d3 or opengl for js is recommended       | Low      | Sijie Lin   |  To Do    |
 | ~~RESTful api~~          | ~~java+jersey, build and deploy~~        | ~~High~~ | Zeyu Chen   |  Done     |
-| RESTful api test         | Test API                                 | Low      | TBA         |  To Do    |
-| API Misc                 | API doc, site construct and SSL          | Low      | TBA         |  To Do    |
+| RESTful api test         | Test API                                 | Low      | Sijie Lin   |  To Do    |
+| API Misc                 | API doc, site construct and SSL          | Low      | Sijie Lin   |  To Do    |
+| Combined Search          | How to search with two or more factors?  | High     | Zeyu Chen   |  Progress |
 
 ## Data
 
@@ -76,4 +77,3 @@ Data is from FEMA dataset. Downloaded on May 11th 2018.
 
 Wow, found previous work
 https://github.com/jdungan/disasters
-
