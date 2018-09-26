@@ -69,8 +69,8 @@ public class MyResource {
     @Path("/declarationDate")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getByDeclarationDate(@QueryParam("year") String year, 
-                                       @QueryParam("month") String month,
-                                       @QueryParam("day") String day) {
+                                         @QueryParam("month") String month,
+                                         @QueryParam("day") String day) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("DizasterX");
         MongoCollection<Document> collection = database.getCollection("data");
@@ -162,8 +162,8 @@ public class MyResource {
     @Path("/incidentBeginDate")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getByIncidentBeginDate(@QueryParam("year") String year, 
-                                         @QueryParam("month") String month,
-                                         @QueryParam("day") String day) {
+                                           @QueryParam("month") String month,
+                                           @QueryParam("day") String day) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("DizasterX");
         MongoCollection<Document> collection = database.getCollection("data");
@@ -216,8 +216,8 @@ public class MyResource {
     @Path("/incidentEndDate")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getByIncidentEndDate(@QueryParam("year") String year, 
-                                       @QueryParam("month") String month,
-                                       @QueryParam("day") String day) {
+                                         @QueryParam("month") String month,
+                                         @QueryParam("day") String day) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("DizasterX");
         MongoCollection<Document> collection = database.getCollection("data");
@@ -270,8 +270,8 @@ public class MyResource {
     @Path("/disasterCloseOutDate")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getByDisasterCloseOutDate(@QueryParam("year") String year, 
-                                            @QueryParam("month") String month,
-                                            @QueryParam("day") String day) {
+                                              @QueryParam("month") String month,
+                                              @QueryParam("day") String day) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("DizasterX");
         MongoCollection<Document> collection = database.getCollection("data");
@@ -324,8 +324,8 @@ public class MyResource {
     @Path("/lastRefresh")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getByLastRefresh(@QueryParam("year") String year, 
-                                   @QueryParam("month") String month,
-                                   @QueryParam("day") String day) {
+                                     @QueryParam("month") String month,
+                                     @QueryParam("day") String day) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("DizasterX");
         MongoCollection<Document> collection = database.getCollection("data");
