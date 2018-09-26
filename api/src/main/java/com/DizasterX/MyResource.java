@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import javax.ws.rs.core.Response;
+
 /**
  * Root resource (exposed at "data" path)
  * 
@@ -66,7 +68,7 @@ public class MyResource {
     @GET
     @Path("/declarationDate")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByDeclarationDate(@QueryParam("year") String year, 
+    public Response getByDeclarationDate(@QueryParam("year") String year, 
                                        @QueryParam("month") String month,
                                        @QueryParam("day") String day) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
@@ -97,11 +99,15 @@ public class MyResource {
         
         // Packaging
         Document res = new Document("name", "Declartion Date")
-                                   .append("status", "ok")
+                                   .append("size", entries.size())
                                    .append("entries", entries);
 
         mongoClient.close();
-        return res.toJson();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
     }
 
     /**
@@ -113,7 +119,7 @@ public class MyResource {
     @GET
     @Path("/fyDeclared")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByFyDeclared(@QueryParam("value") int value) {
+    public Response getByFyDeclared(@QueryParam("value") int value) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("DizasterX");
         MongoCollection<Document> collection = database.getCollection("data");
@@ -132,11 +138,15 @@ public class MyResource {
         
         // Packaging
         Document res = new Document("name", "Fiscal Year Declared")
-                                   .append("status", "ok")
+                                   .append("size", entries.size())
                                    .append("entries", entries);
 
         mongoClient.close();
-        return res.toJson();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
     }
 
     /**
@@ -151,7 +161,7 @@ public class MyResource {
     @GET
     @Path("/incidentBeginDate")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByIncidentBeginDate(@QueryParam("year") String year, 
+    public Response getByIncidentBeginDate(@QueryParam("year") String year, 
                                          @QueryParam("month") String month,
                                          @QueryParam("day") String day) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
@@ -182,11 +192,15 @@ public class MyResource {
         
         // Packaging
         Document res = new Document("name", "Incident Begin Date")
-                                   .append("status", "ok")
+                                   .append("size", entries.size())
                                    .append("entries", entries);
 
         mongoClient.close();
-        return res.toJson();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
     }
 
     /**
@@ -201,7 +215,7 @@ public class MyResource {
     @GET
     @Path("/incidentEndDate")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByIncidentEndDate(@QueryParam("year") String year, 
+    public Response getByIncidentEndDate(@QueryParam("year") String year, 
                                        @QueryParam("month") String month,
                                        @QueryParam("day") String day) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
@@ -232,11 +246,15 @@ public class MyResource {
         
         // Packaging
         Document res = new Document("name", "Incident End Date")
-                                   .append("status", "ok")
+                                   .append("size", entries.size())
                                    .append("entries", entries);
 
         mongoClient.close();
-        return res.toJson();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
     }
 
     /**
@@ -251,7 +269,7 @@ public class MyResource {
     @GET
     @Path("/disasterCloseOutDate")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByDisasterCloseOutDate(@QueryParam("year") String year, 
+    public Response getByDisasterCloseOutDate(@QueryParam("year") String year, 
                                             @QueryParam("month") String month,
                                             @QueryParam("day") String day) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
@@ -282,11 +300,15 @@ public class MyResource {
         
         // Packaging
         Document res = new Document("name", "Incident End Date")
-                                   .append("status", "ok")
+                                   .append("size", entries.size())
                                    .append("entries", entries);
 
         mongoClient.close();
-        return res.toJson();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
     }
 
     /**
@@ -301,7 +323,7 @@ public class MyResource {
     @GET
     @Path("/lastRefresh")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByLastRefresh(@QueryParam("year") String year, 
+    public Response getByLastRefresh(@QueryParam("year") String year, 
                                    @QueryParam("month") String month,
                                    @QueryParam("day") String day) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
@@ -332,11 +354,15 @@ public class MyResource {
         
         // Packaging
         Document res = new Document("name", "Last Update")
-                                   .append("status", "ok")
+                                   .append("size", entries.size())
                                    .append("entries", entries);
 
         mongoClient.close();
-        return res.toJson();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
     }
 
     /**
@@ -349,7 +375,7 @@ public class MyResource {
     @GET
     @Path("/state")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByState(@QueryParam("value") String value) {
+    public Response getByState(@QueryParam("value") String value) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("DizasterX");
         MongoCollection<Document> collection = database.getCollection("data");
@@ -368,12 +394,16 @@ public class MyResource {
         
         // Packaging
         Document res = new Document("name", "State")
-                                    .append("status", "ok")
-                                    .append("size", entries.size())
-                                    .append("entries", entries);
+                                   .append("size", entries.size())
+                                   .append("entries", entries);
 
         mongoClient.close();
-        return res.toJson();
+        // return res.toJson();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
     }
 
     /**
@@ -386,7 +416,7 @@ public class MyResource {
     @GET
     @Path("/county")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByCounty(@QueryParam("value") String value) {
+    public Response getByCounty(@QueryParam("value") String value) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("DizasterX");
         MongoCollection<Document> collection = database.getCollection("data");
@@ -405,12 +435,15 @@ public class MyResource {
         
         // Packaging
         Document res = new Document("name", "County")
-                                    .append("status", "ok")
-                                    .append("size", entries.size())
-                                    .append("entries", entries);
+                                   .append("size", entries.size())
+                                   .append("entries", entries);
 
         mongoClient.close();
-        return res.toJson();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
     }
 
     /**
@@ -422,7 +455,7 @@ public class MyResource {
     @GET
     @Path("/placeCode")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByPlaceCode(@QueryParam("value") int value) {
+    public Response getByPlaceCode(@QueryParam("value") int value) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("DizasterX");
         MongoCollection<Document> collection = database.getCollection("data");
@@ -441,11 +474,15 @@ public class MyResource {
         
         // Packaging
         Document res = new Document("name", "Place Code")
-                                   .append("status", "ok")
+                                   .append("size", entries.size())
                                    .append("entries", entries);
 
         mongoClient.close();
-        return res.toJson();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
     }
 
     /**
@@ -457,7 +494,7 @@ public class MyResource {
     @GET
     @Path("/ihProgramDeclared")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByIHProgram(@QueryParam("value") int value) {
+    public Response getByIHProgram(@QueryParam("value") int value) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("DizasterX");
         MongoCollection<Document> collection = database.getCollection("data");
@@ -476,11 +513,14 @@ public class MyResource {
         
         // Packaging
         Document res = new Document("name", "IH Program")
-                                   .append("status", "ok")
                                    .append("entries", entries);
 
         mongoClient.close();
-        return res.toJson();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
     }
 
     /**
@@ -492,7 +532,7 @@ public class MyResource {
     @GET
     @Path("/iaProgramDeclared")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByIAProgram(@QueryParam("value") int value) {
+    public Response getByIAProgram(@QueryParam("value") int value) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("DizasterX");
         MongoCollection<Document> collection = database.getCollection("data");
@@ -511,11 +551,14 @@ public class MyResource {
         
         // Packaging
         Document res = new Document("name", "IA Program")
-                                   .append("status", "ok")
                                    .append("entries", entries);
 
         mongoClient.close();
-        return res.toJson();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
     }
 
     /**
@@ -527,7 +570,7 @@ public class MyResource {
     @GET
     @Path("/paProgramDeclared")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByPAProgram(@QueryParam("value") int value) {
+    public Response getByPAProgram(@QueryParam("value") int value) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("DizasterX");
         MongoCollection<Document> collection = database.getCollection("data");
@@ -546,11 +589,14 @@ public class MyResource {
         
         // Packaging
         Document res = new Document("name", "PA Program")
-                                   .append("status", "ok")
                                    .append("entries", entries);
 
         mongoClient.close();
-        return res.toJson();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
     }
 
     /**
@@ -562,7 +608,7 @@ public class MyResource {
     @GET
     @Path("/hmProgramDeclared")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByHMProgram(@QueryParam("value") int value) {
+    public Response getByHMProgram(@QueryParam("value") int value) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("DizasterX");
         MongoCollection<Document> collection = database.getCollection("data");
@@ -581,11 +627,15 @@ public class MyResource {
         
         // Packaging
         Document res = new Document("name", "HM Program")
-                                   .append("status", "ok")
+                                   .append("size", entries.size())
                                    .append("entries", entries);
 
         mongoClient.close();
-        return res.toJson();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
     }
 
     /**
@@ -599,7 +649,7 @@ public class MyResource {
     @GET
     @Path("/title")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByTitle(@QueryParam("value") String value) {
+    public Response getByTitle(@QueryParam("value") String value) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("DizasterX");
         MongoCollection<Document> collection = database.getCollection("data");
@@ -618,12 +668,15 @@ public class MyResource {
         
         // Packaging
         Document res = new Document("name", "Title")
-                        .append("status", "ok")
-                        .append("size", entries.size())
-                        .append("entries", entries);
+                                   .append("size", entries.size())
+                                   .append("entries", entries);
 
         mongoClient.close();
-        return res.toJson();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
     }
 
     /**
@@ -635,7 +688,7 @@ public class MyResource {
     @GET
     @Path("/hash")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByHash(@QueryParam("value") String value) {
+    public Response getByHash(@QueryParam("value") String value) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("DizasterX");
         MongoCollection<Document> collection = database.getCollection("data");
@@ -644,10 +697,14 @@ public class MyResource {
 
         // Packaging
         Document res = new Document("name", "Hash")
-                        .append("status", "ok")
-                        .append("entries", entries);
+                                   .append("size", entries.size())
+                                   .append("entries", entries);
         
         mongoClient.close();
-        return res.toJson();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
     }
 }
