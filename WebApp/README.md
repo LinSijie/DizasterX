@@ -40,6 +40,4 @@ WebApp/
 
 `UrlConcat.js` is a component which concatenate URLs and fetch data.  Not finished.
 
-`DataExtract.js` is a component which extract key information from the data. To Do
-
-`WrappedList.js` is a component which display the searching result. It receive data from `DataExtract.js`. To Do
+`WrappedList.js` is a component which display the searching result. To Do
