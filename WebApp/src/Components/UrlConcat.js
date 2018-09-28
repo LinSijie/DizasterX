@@ -6,6 +6,9 @@ class UrlConcat extends Component {
     constructor(props) {
         super(props);
         console.log(props);
+        this.state = {
+            encounters:[]
+        };
         // In ES6, need binding
         this.setState = this.setState.bind(this)
     }
@@ -46,27 +49,29 @@ class UrlConcat extends Component {
     
     */
 
-
+    
     render(){
         console.log('In Url render')
         return(
             <div><h1>URL Component</h1></div>
         );
     }
-
+    
     componentWillReceiveProps(newProps) {
         console.log('In Url ReceiveProps');
         console.log(newProps);
-        console.log(this.props);
+        //console.log(this.props);
         
         if (this.props.values === newProps.values){
             return;
-        } else {
+        } 
+        /*
+        else {
             let values = newProps.values;
-            if (values.statePicker[0] === undefined && values.datePicker === undefined && values.disasterPicker === undefined) {
+            if (values.statePicker === undefined && values.datePicker === undefined && values.disasterPicker === undefined) {
                 return;
             }
-        }
+        }*/
         
         let values = newProps.values;
         let state = values.statePicker === undefined ? '':values.statePicker;
@@ -78,56 +83,66 @@ class UrlConcat extends Component {
         console.log(type);
         
         // server
-        let url = "http://czy-kasakun.com:8080/DizasterX/webapi/data/";
+        let url = "http://czy-kasakun.com:8080/DizasterX/webapi/data/list?";
         // local test
         // let url = "http://localhost:8080/DizasterX/data/";
         let len = url.length;
-        if (state !== '')
-            url = url + 'state?value=' + state;
 
-        /*if (type !== '') {
-            let temp = len === url.length? ('type?value=' + type):('&type?value='+ type);
+        if (date.length !== 0) {
+            let temp = 'date1=' + date[0]+ '&date2='+ date[1];
             url += temp;
         }
 
-        if (date !== '') {
-            let temp = len === url.length? ('date?value=' + date):('&date?value='+ date);
-            url += temp;
+        if (state.length !== 0){
+            let temp = len === url.length ? ('states=' + state[0]):('&states=' + state[0]);
+            url = url + temp;
+            for(let i = 1; i < state.length; ++i){
+                url = url + ',' + state[i];
+            }
         }
-        */
+            
+        if (type.length !== 0){
+            let temp = len === url.length ? ('incidentTypes=' + type[0]):('&incidentTypes=' + type[0]);
+            url = url + temp;
+            for(let i = 1; i < type.length; ++i){
+                url = url + ',' + type[i];
+            }
+        }
+
         console.log(url);
         
         fetch(url)
             .then(res => {
                 if (JSON.stringify(res.ok)){console.log("Response success");return res.json();}
             })
-            /*
+            
             .then(data => {
                 let Encounters = [];
-                if (data.entry === undefined) {
+                if (data.entries === undefined) {
                     this.setState({
                         encounters: [],
                     });
                     return;
                 }
-                for (let i = 0; i < 10; ++i) {
-                    if (data.entry[i] === undefined) break;
-                    let entry = data.entry[i].resource;
+                
+                for (let i = 0; i < data.entries.length; ++i) {
+                    if (data.entries[i] === undefined) break;
+                    let entries = data.entries[i];
                     // get data
-                    console.log(entry);
-                    let Name = entry.patient.display;
-                    let ID = entry.id;
-                    let startDate = entry.period.start;
-                    let endDate = entry.period.end;
-                    let PatientID = entry.patient.reference;
-                    Encounters[i] = {name: Name, id: ID, patientID: PatientID, startdate: startDate, enddate: endDate };
+                    
+                    let startDate = entries.incidentBeginDate;
+                    let endDate = entries.incidentEndDate;
+                    let title = entries.title;
+                    let state = entries.state;
+                    let type = entries.incidentType;
+                    Encounters[i] = {title: title, state: state, type: type, startdate: startDate, enddate: endDate };
                 }
-                // console.log(Encounters);
+                 console.log('Encounters:',Encounters);
                 this.setState({
                     encounters: Encounters,
                 });
                 // console.log(this.state.encounters);
-            });*/
+            });
     }
 
 }
