@@ -19,15 +19,25 @@ class FiltrateForm extends Component {
       if (err) {
         return;
       }
-      
+      console.log(fieldsValue);
+
       // Should format date value before submit.
-      const rangeValue = fieldsValue['datePicker'];
-      const values = {
-        ...fieldsValue,
-        'datePicker': [rangeValue[0].format('YYYY-MM-DD'), rangeValue[1].format('YYYY-MM-DD')]
-      };
-      this.setState({values: values});
-      console.log('Received values of form: ', values);
+      if (fieldsValue['datePicker'] !== undefined && fieldsValue.datePicker.length !== 0){
+        const rangeValue = fieldsValue['datePicker'];
+        const values = {
+          ...fieldsValue,
+          'datePicker': [rangeValue[0].format('YYYYMMDD'), rangeValue[1].format('YYYYMMDD')]
+        };
+        this.setState({values: values});  
+        console.log('Received values of form: ', values); 
+      }
+      else {
+        const values = {
+          ...fieldsValue
+        };
+        this.setState({values: values});  
+        console.log('Received values of form: ', values); 
+      }
     });
   }
 
@@ -47,13 +57,13 @@ class FiltrateForm extends Component {
     //  rules: [{ type: 'object', required: true, message: 'Please select time!' }],
     //};
     const dateConfig = {
-      rules: [{ type: 'array', required: true, message: 'Please select Time!' }],
+      rules: [{ type: 'array', required: false, message: 'Please select Time!' }],
     };
     const stateConfig = {
-      rules: [{ type: 'array', required: true, message: 'Please select State!' }],
+      rules: [{ type: 'array', required: false, message: 'Please select State!' }],
     };
     const disasterConfig = {
-        rules: [{ type: 'array', required: true, message: 'Please select Disaster Type!' }],
+        rules: [{ type: 'array', required: false, message: 'Please select Disaster Type!' }],
       };
     return (
       <div>
