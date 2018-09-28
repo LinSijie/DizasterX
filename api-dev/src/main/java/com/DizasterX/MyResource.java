@@ -14,6 +14,8 @@ import org.bson.Document;
 import com.mongodb.Block;
 
 import static com.mongodb.client.model.Filters.*;
+
+import java.awt.SystemTray;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -697,6 +699,76 @@ public class MyResource {
 
         // Packaging
         Document res = new Document("name", "Hash")
+                                   .append("size", entries.size())
+                                   .append("entries", entries);
+        
+        mongoClient.close();
+        return Response.ok() //200
+                       .entity(res.toJson())
+                       .header("Access-Control-Allow-Origin", "*")
+                       .header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+                       .allow("OPTIONS").build();
+    }
+
+    /**
+     * Method handling list request
+     * 
+     * First query MongoDB by dates.
+     * Then use regex to match the search words
+     * 
+     * @param date1 start date 00000000 for the blank
+     * @param date2 end date 99999999 for the blank
+     * @param states support multiple
+     * @param incidentTypes support multiple
+     * 
+     * @return the values in [date1, date2] which match states and incidentTypes
+     */
+    @GET
+    @Path("/list")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response list(@QueryParam("date1") String date1,
+                         @QueryParam("date2") String date2,
+                         @QueryParam("states") String states, 
+                         @QueryParam("incidentTypes") String incidentTypes) {
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("DizasterX");
+        // We use new date base here.
+        MongoCollection<Document> collection = database.getCollection("data1");
+
+        final List<Document> tempEntries = new ArrayList<>();
+        final List<Document> entries = new ArrayList<>();
+        
+        Block<Document> addToList = new Block<Document>() {
+            @Override
+            public void apply(final Document document) {
+                tempEntries.add(document);
+            }
+        };
+        
+        // First filter by dates
+        date1 = (date1 == null)? "00000000": date1;
+        date2 = (date2 == null)? "99999999": date2;
+        collection.find(and(gte("dateNumber", Integer.parseInt(date1)),
+                            lte("dateNumber", Integer.parseInt(date2)))).forEach(addToList);
+
+        // Regex match the state and incidentType
+        for(Document entry : tempEntries) {
+            String statePattern;
+            String typePattern;
+            boolean bState, bType;
+
+            statePattern = ".*(?i)" + entry.get("state") + "(?-i).*";
+            bState = (states == null) ? true:Pattern.matches(statePattern, states);
+            typePattern = ".*(?i)" + entry.get("incidentType") + "(?-i).*";
+            bType = (incidentTypes == null) ? true:Pattern.matches(typePattern, incidentTypes);
+            if (bState && bType) {
+                System.out.println(entry);
+                entries.add(entry);
+            }
+        }
+
+        // Packaging
+        Document res = new Document("name", "list")
                                    .append("size", entries.size())
                                    .append("entries", entries);
         

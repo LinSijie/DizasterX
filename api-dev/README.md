@@ -17,27 +17,43 @@ The default address is http://localhost:8080/DizasterX/data/
 
 ## Query
 
+### Single Parameter
+
 Supported quries are placed below:
 
 ```java
- * @ Date   : declaration    String
- *            fyDeclared     int
- *            begin          String
- *            end            String
- *            closeout       String
- *            lastrefresh    String
- * @ Place  : state          String
- *            county         String   not all
- *            palceCode      int      not all
- * 
- * @ Type   : incident       String
- *            disaster       String
- * 
- * @ Program: IH             int
- *            IA             int
- *            PA             int
- *            HM             int
- * 
- * @ Title                   String
- * @ Hash                    String
+@ Date   : declaration    String
+           fyDeclared     int
+           begin          String
+           end            String
+           closeout       String
+           lastrefresh    String
+@ Place  : state          String
+           county         String   not all
+           palceCode      int      not all
+  
+@ Type   : incident       String
+           disaster       String
+  
+@ Program: IH             int
+           IA             int
+           PA             int
+           HM             int
+  
+@ Title                   String
+@ Hash                    String
+
  ```
+
+### Multiple Parameters
+
+`List` - Return the results given dates interval, states and incidentTypes.
+
+```java
+@param String date1         // interval start
+@param String date2         // interval end
+@param String states        // comma seprated recommended
+@param String incidentTypes // comma seprated recommended
+```
+
+For test, `http://localhost:8080/DizasterX/data/list`
