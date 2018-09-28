@@ -762,7 +762,6 @@ public class MyResource {
             typePattern = ".*(?i)" + entry.get("incidentType") + "(?-i).*";
             bType = (incidentTypes == null) ? true:Pattern.matches(typePattern, incidentTypes);
             if (bState && bType) {
-                System.out.println(entry);
                 entries.add(entry);
             }
         }
