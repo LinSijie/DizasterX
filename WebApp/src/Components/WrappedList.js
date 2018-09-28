@@ -13,13 +13,9 @@ class WrappedList extends Component{
                 dataSource={data}
                 renderItem={item => (
                     <List.Item>
-                        <List.Item.Meta
-                        description={
-                            <div>
-                                {item.title},{item.state},{item.type},{item.startdate},{item.enddate}
-                            </div>
-                        }
-                        />
+                        <div>
+                        {item.title}, {item.state}, {item.type}, {item.startdate}, {item.enddate}
+                        </div>
                     </List.Item>
                 )}
                 pagination={{
