@@ -4,7 +4,7 @@ Front End of DizasterX
 
 ## Front End Repo
 
-React + Ant-design
+React + Redux + Ant-design
 `WebApp` is the directory for local development and local test.
 
 ### Structure
@@ -48,13 +48,34 @@ WebApp/
 
 ### Function Description
 
+#### `src/`
 
-`WrappedForm.js` is a component of search bars. It is a form with 4 form items(date picker, state picker, disaster picker and submit buttom). Component `UrlConcat` is called to pass the form values.
+`App.js` : describes the layout of homepage
 
+#### `components/`
 
-`WrappedList.js` is a component which display the searching result. To Do
+`WrappedForm.js` : component of search bars. It is a form with 4 form items(date picker, state picker, disaster picker and submit buttom).
 
+`WrappedList.js` : component which displays the searching result. 
 
-###Notes
+#### `actions/`
 
-`cart.js` and `shelf.js` are test files.
+`updateForm.js` : action which updates the latest values of form into the Redux `store`.
+
+`urlConcat.js` : action which concatentates URLs and updates the latest URL into the Redux `store`.
+
+`fetchData.js` : action which fetches data from webapi and updates the latest data into the Redux `store`.
+
+#### `reducers/`
+
+`index.js` : root reducer which combines other reducers
+
+`formValues.js` : reducer corresponding to `updateForm.js` action.
+
+`url.js` : reducer corresponding to `urlConcat.js` action.
+
+`fetchData.js` : reducer corresponding to `fetchData.js` action.
+
+#### Notes
+
+`cart.js` and `shelf.js` are test files and irrelevant to the `WebApp` project.
