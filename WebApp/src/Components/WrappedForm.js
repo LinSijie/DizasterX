@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as FormAction from '../actions/updateForm';
+import * as UrlAction from '../actions/urlConcat';
+import * as FetchAction from '../actions/fetchData';
 import 'antd/dist/antd.css';
 import { Form, DatePicker, Button } from 'antd';
 import { Select } from 'antd';
-import UrlConcat from './UrlConcat';
+//import UrlConcat from './UrlConcat';
 
 const FormItem = Form.Item;
 const { RangePicker } = DatePicker;
 
 class FiltrateForm extends Component {
-    state = {
-        values:[],
-    };
+  constructor(props){
+    super(props);
     
+  }
+  
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -19,7 +25,6 @@ class FiltrateForm extends Component {
       if (err) {
         return;
       }
-      console.log(fieldsValue);
 
       // Should format date value before submit.
       if (fieldsValue['datePicker'] !== undefined && fieldsValue.datePicker.length !== 0){
@@ -28,20 +33,29 @@ class FiltrateForm extends Component {
           ...fieldsValue,
           'datePicker': [rangeValue[0].format('YYYYMMDD'), rangeValue[1].format('YYYYMMDD')]
         };
-        this.setState({values: values});  
-        console.log('Received values of form: ', values); 
+        this.props.action1.updateForm(values);
+        let URL = this.props.action2.urlConcat(values);
+        //console.log("URL=",URL.url)
+        this.props.action3.fetchData(URL.url);
+        //console.log('Received values of form: ', values); 
       }
       else {
         const values = {
           ...fieldsValue
         };
-        this.setState({values: values});  
-        console.log('Received values of form: ', values); 
+        this.props.action1.updateForm(values);
+        let URL = this.props.action2.urlConcat(values); 
+        this.props.action3.fetchData(URL.url);
+        //console.log('Received values of form: ', values); 
       }
     });
+    console.log("form.handleSubmit ended, form.props:",this.props)
+    //
+    //this.props.action3.fetchData(this.props.url);
   }
 
   render() {
+    console.log("in form render, form.props =", this.props);
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
       labelCol: {
@@ -67,7 +81,7 @@ class FiltrateForm extends Component {
       };
     return (
       <div>
-        <div>
+  
       <Form onSubmit={this.handleSubmit}>
         <FormItem
           {...formItemLayout}
@@ -117,15 +131,30 @@ class FiltrateForm extends Component {
           <Button type="primary" htmlType="submit">Submit</Button>
         </FormItem>
       </Form>
-        </div>
-
-        <div><UrlConcat values={this.state.values}/></div>
+        
       </div>
     );
   }
 }
 
-export default FiltrateForm;
+function mapStateToProps(state, prop){
+  console.log("in form component mapStateToProps, state=",state);
+  return{
+      formValues: state.formValues,
+      url: state.url,
+      fetchData: state.fetchData
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return{
+      action1: bindActionCreators(FormAction, dispatch), 
+      action2: bindActionCreators(UrlAction, dispatch),
+      action3: bindActionCreators(FetchAction, dispatch),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FiltrateForm);
 
 
 

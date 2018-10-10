@@ -17,15 +17,29 @@ WebApp/
 │   ├──manifest.json
 │
 ├── src/
+|   │
+│   ├── actions/
+|   │   ├── fetchData.js
+|   │   ├── updateForm.js
+|   │   └── urlConcat.js
+|   │
 │   ├── Components/
-|   |   ├── UrlConcat.js
 |   │   ├── WrappedForm.js
 |   │   └── WrappedList.js
 |   │
+│   ├── reducers/
+|   │   ├── fetchData.js
+|   │   ├── formValues.js
+|   │   ├── index.js
+|   │   └── url.js
+|   │
+|   ├── App.js
+|   ├── App.css
 |   ├── index.js
 |   ├── index.css
 |   ├── logo.svg
-|   └── registerServiceWorker.js
+|   ├── registerServiceWorker.js
+|   └── store.js
 |
 ├── package-lock.json
 ├── package.json
@@ -34,10 +48,13 @@ WebApp/
 
 ### Function Description
 
-`index.js` describes the layout of the website. The website is divided into 4 parts: Header, Sider, Content, and Footer. The search bars lays in the Sider part. Searching results are listed in the Content part.
 
 `WrappedForm.js` is a component of search bars. It is a form with 4 form items(date picker, state picker, disaster picker and submit buttom). Component `UrlConcat` is called to pass the form values.
 
-`UrlConcat.js` is a component which concatenate URLs and fetch data.  Not finished.
 
 `WrappedList.js` is a component which display the searching result. To Do
+
+
+###Notes
+
+`cart.js` and `shelf.js` are test files.
