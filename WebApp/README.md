@@ -5,6 +5,7 @@ Front End of DizasterX
 ## Front End Repo
 
 React + Redux + Ant-design
+
 `WebApp` is the directory for local development and local test.
 
 ### Structure
@@ -51,6 +52,10 @@ WebApp/
 #### `src/`
 
 `App.js` : describes the layout of homepage
+
+`index.js` : includes Redux setup
+
+`store.js` : Redux setup
 
 #### `components/`
 
